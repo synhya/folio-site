@@ -25,14 +25,14 @@ export const data = {
     ]
   },
   "skills": {
-    "Languages known": [
+    "言語": [
       icon.siTypescript,
       icon.siJavascript,
       icon.siHtml5,
       icon.siCss3,
       icon.siCsharp,
     ],
-    "Frontend": [
+    "フロントエンド": [
       icon.siReact,
       icon.siNextdotjs,
       {
@@ -48,13 +48,13 @@ export const data = {
       icon.siMui,
       icon.siVercel,
     ],
-    "Backend, Database": [
+    "バックエンド": [
       icon.siPostgresql,
       icon.siDrizzle,
       icon.siSupabase,
       icon.siLaravel
     ],
-    "Mobile, Extra": [
+    "その他": [
       icon.siExpo,
       {
         ...icon.siUnity,
