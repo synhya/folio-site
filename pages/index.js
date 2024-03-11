@@ -30,6 +30,8 @@ export async function getStaticProps() {
       async repos => {
         const repo = await fetch(baseURI + repos.name, reqInit).then(res => res.json());
         const langs = await fetch(baseURI + repos.name + "/languages", reqInit).then(res => res.json())
+        console.log(langs);
+
         return {
           ...repo,
           languages: Object.getOwnPropertyNames(langs),
