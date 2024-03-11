@@ -51,7 +51,7 @@ export default function Projects({ data }) {
                                 <Card key={i} className={classes.card}>
                                     <CardActionArea
                                         className={classes.cardActionArea}
-                                        href={v.value.html_url}
+                                        href={v.value.external || v.value.html_url}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >

@@ -3,9 +3,7 @@ import { AppBar, Container, IconButton, makeStyles, Toolbar, Typography, useScro
 import Landing from '../src/Landing';
 import Skills from '../src/Skills';
 import Projects from '../src/Projects';
-import Experience from '../src/Experience';
-import About from '../src/About';
-import data from '../data.json';
+import { data } from '../public/data';
 import { darkTheme, lightTheme } from '../src/theme';
 import { Brightness4, Brightness7 } from '@material-ui/icons';
 const { name, projects } = data
@@ -29,12 +27,13 @@ export async function getStaticProps() {
   }
   const fullRepoData = await Promise.allSettled(
     repos.map(
-      async name => {
-        const repo = await fetch(baseURI + name, reqInit).then(res => res.json());
-        const langs = await fetch(baseURI + name + "/languages", reqInit).then(res => res.json())
+      async repos => {
+        const repo = await fetch(baseURI + repos.name, reqInit).then(res => res.json());
+        const langs = await fetch(baseURI + repos.name + "/languages", reqInit).then(res => res.json())
         return {
           ...repo,
-          languages: Object.getOwnPropertyNames(langs)
+          languages: Object.getOwnPropertyNames(langs),
+          external: repos.external ?? null,
         };
       }
     )
@@ -77,8 +76,8 @@ export default function Index({ projects, setTheme }) {
         <Landing />
         <Skills />
         <Projects data={projects}/>
-        <Experience/>
-        <About/>
+        {/*<Experience/>*/}
+        {/*<About/>*/}
       </Container>
     </div>
   );

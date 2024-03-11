@@ -2,23 +2,18 @@ import { Avatar, Fade, Grid, Hidden, makeStyles, Tooltip, Typography, useMediaQu
 import ReactTyped from "react-typed";
 import clsx from "clsx";
 import Image from 'next/image'
-import simpleIcons from 'simple-icons'
-import data from '../data.json'
-import { iconify } from "./util";
-import Cancel from "@material-ui/icons/Cancel";
-const { landing } = data
+import { data } from '../public/data'
+import {useCallback, useMemo} from "react";
+
+const { landing } = data;
 
 const professionalDetails = landing.professionalDetails.map(({ alt, icon, link }) => {
-    const ic = simpleIcons.get(iconify(icon)) || {
-        hex: '424242',
-        component: <Cancel color="white" fontSize={36} />
-    }
     return {
         alt,
-        backgroundColor: '#' + ic.hex,
-        icon: ic.component || <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" height="100%" width="100%" xmlnsXlink="http://www.w3.org/1999/xlink">
-            <title>{icon}</title>
-            <path d={ic.path} fill="white" />
+        backgroundColor: '#' + (icon.hex),
+        icon: <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" height="100%" width="100%" xmlnsXlink="http://www.w3.org/1999/xlink">
+            <title>{icon.title}</title>
+            <path d={icon.path} fill="white" />
         </svg>,
         link
     }
@@ -44,22 +39,22 @@ const useStyles = makeStyles(theme => ({
         padding: theme.spacing(2)
     },
     ...iobj
-}))
+}));
+
 
 export default function Landing() {
-
-    const classes = useStyles();
     const theme = useTheme();
     const mdDown = useMediaQuery(theme.breakpoints.down('sm'));
+
+    const classes = useStyles();
 
     return (
         <Grid container justify="center" alignItems="center" className={classes.cont}>
             <Grid item xs={12} lg={6}>
-                <Typography variant={mdDown ? "h2" : "h1"}>
-                    {landing.title}
+                <Typography variant={mdDown ? "h3" : "h2"}>
+                    {landing.title.map((t, i) => <span key={i}>{t}<br /></span>)}
                 </Typography>
                 <Typography variant={mdDown ? "h5" : "h4"} component="h2" className={classes.subtitle}>
-
                     <ReactTyped
                         strings={landing.subtitles}
                         typeSpeed={40}
@@ -87,13 +82,13 @@ export default function Landing() {
             </Grid>
 
             <Hidden mdDown>
-                <Fade in={true} style={{ transitionDelay: '100ms' }}>
+                <Fade in={true} style={{transitionDelay: '100ms'}}>
                     <Grid item lg={6}>
                         <Image
-                            src="/landing.svg"
-                            alt="Landing"
-                            width="900.94"
-                            height="787"
+                          src="/landing.svg"
+                          alt="Landing"
+                          width="900.94"
+                          height="787"
                         />
                     </Grid>
                 </Fade>
