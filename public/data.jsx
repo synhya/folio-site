@@ -67,7 +67,6 @@ export const data = {
     "repositories": [
       {
         "name": "clothes-commerce-app",
-        "external": "https://clothes-commerce-app.vercel.app/",
       },
       {
         "name": "bitcoin-app",
